@@ -1,0 +1,23 @@
+{
+    "name": "skyttes/vite",
+    "description": "Vite integration for Skyttes",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Skyttes\\Vite\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mia Vališová",
+            "email": "valisova@lilianaa.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "nette/utils": "^3.2",
+        "ext-curl": "*"
+    }
+}

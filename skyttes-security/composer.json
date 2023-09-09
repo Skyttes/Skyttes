@@ -1,0 +1,22 @@
+{
+    "name": "skyttes/security",
+    "description": "Authentication and users for Skyttes",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Skyttes\\Security\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mia Vališová",
+            "email": "valisova@lilianaa.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "nette/security": "^3.1"
+    }
+}

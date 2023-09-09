@@ -1,0 +1,23 @@
+{
+    "name": "skyttes/core",
+    "description": "Skyttes core & utilities",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Skyttes\\Core\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mia Vališová",
+            "email": "valisova@lilianaa.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "nette/forms": "^4.0@dev",
+        "nette/utils": "^4.0@dev",
+        "symfony/string": "7.0.x-dev"
+    }
+}

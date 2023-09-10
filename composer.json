@@ -1,0 +1,45 @@
+{
+    "name": "skyttes/skyttes",
+    "description": "Skyttes monorepo",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mia Vališová",
+            "email": "valisova@lilianaa.dev"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "^3.6",
+        "doctrine/orm": "^2.15",
+        "ext-curl": "*",
+        "nette/application": "^3.1",
+        "nette/bootstrap": "^3.2",
+        "nette/di": "^3.1",
+        "nette/forms": "^3.1",
+        "nette/security": "^3.1",
+        "nette/utils": "^3.2",
+        "ramsey/uuid": "^4.7",
+        "ramsey/uuid-doctrine": "^2.0",
+        "symfony/string": "^6.3"
+    },
+    "require-dev": {
+        "symplify/monorepo-builder": "^11.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skyttes\\Core\\": "skyttes-core/src/",
+            "Skyttes\\Doctrine\\": "skyttes-doctrine/src/",
+            "Skyttes\\Security\\": "skyttes-security/src/",
+            "Skyttes\\Vite\\": "skyttes-vite/src/"
+        }
+    },
+    "replace": {
+        "skyttes/core": "self.version",
+        "skyttes/doctrine": "self.version",
+        "skyttes/security": "self.version",
+        "skyttes/vite": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,6 +1,6 @@
 {
     "name": "skyttes/skyttes",
-    "description": "Skyttes monorepo",
+    "description": "Skyttes Core",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -23,15 +23,9 @@
         "ramsey/uuid-doctrine": "^2.0",
         "symfony/string": "^6.3"
     },
-    "require-dev": {
-        "symplify/monorepo-builder": "^11.2"
-    },
     "autoload": {
         "psr-4": {
-            "Skyttes\\Core\\": "skyttes-core/src/",
-            "Skyttes\\Doctrine\\": "skyttes-doctrine/src/",
-            "Skyttes\\Security\\": "skyttes-security/src/",
-            "Skyttes\\Vite\\": "skyttes-vite/src/"
+            "Skyttes\\": "src/"
         }
     },
     "replace": {

@@ -72,17 +72,7 @@ class StorageRepository implements StorageRepositoryInterface
         return realpath($this->publicDir . DIRECTORY_SEPARATOR . $path);
     }
 
-    public function isImage(FileUpload $image): bool
-    {
-        return $image->isOk() && in_array($image->getContentType(), self::IMAGES, true);
-    }
-
-    public function isPdf(FileUpload $image): bool
-    {
-        return $image->isOk() && (!$image->getContentType() || $image->getContentType() === "application/pdf");
-    }
-
-    protected function processUpload(FileUpload $file, string $namespace, string $id, bool $copy = false): string
+    public function processUpload(FileUpload $file, string $namespace, string $id, array $args = []): string
     {
         $dir = $this->joinPath($namespace);
         $ext = $this->getExtension($file->getSanitizedName());
@@ -94,7 +84,7 @@ class StorageRepository implements StorageRepositoryInterface
         $path = realpath($dir . DIRECTORY_SEPARATOR . $fileName);
         $tmpPath = $file->getTemporaryFile();
 
-        if ($copy) {
+        if (!empty($args["copy"])) {
             copy($tmpPath, $path);
         } elseif (is_uploaded_file($tmpPath)) {
             move_uploaded_file($tmpPath, $path);
@@ -103,28 +93,6 @@ class StorageRepository implements StorageRepositoryInterface
         }
 
         return $path;
-    }
-
-    public function uploadImage(FileUpload $file, string $namespace, string $id, bool $copy = false): string
-    {
-        if ($this->isImage($file)) {
-            return $this->getUrlPath(
-                $this->optimizeImage(
-                    $this->processUpload($file, $namespace, $id, $copy)
-                )
-            );
-        }
-
-        throw new RuntimeException("Failed to process the uploaded file");
-    }
-
-    public function uploadPdf(FileUpload $file, string $namespace, string $id, bool $copy = false): string
-    {
-        if ($this->isPdf($file)) {
-            return $this->getUrlPath($this->processUpload($file, $namespace, $id, $copy));
-        }
-
-        throw new RuntimeException("Failed to process the uploaded file");
     }
 
 }

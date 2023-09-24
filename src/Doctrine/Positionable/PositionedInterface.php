@@ -2,7 +2,7 @@
 
 namespace Skyttes\Doctrine\Positionable;
 
-interface Positioned {
+interface PositionedInterface {
     public function getPosition(): int;
     
     public function setPosition(int $position): self;

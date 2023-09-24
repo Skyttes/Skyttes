@@ -2,15 +2,9 @@
 
 namespace Skyttes\Storage;
 
-interface StorageRepositoryInterface {
-    public const IMAGES = [
-        'image/png', 
-        'image/jpeg', 
-        'image/webp', 
-        'image/svg+xml',
-        'image/gif', 
-    ];
+use Nette\Http\FileUpload;
 
+interface StorageRepositoryInterface {
     public function getExtension(string $path): string;
 
     public function exists(string $path): bool;
@@ -27,13 +21,5 @@ interface StorageRepositoryInterface {
 
     public function joinPath(string $path): string;
     
-    public function isImage(FileUpload $image): bool;
-
-    public function isPdf(FileUpload $image): bool;
-
-    protected function processUpload(FileUpload $file, string $namespace, string $id, bool $copy = false): string;
-
-    public function uploadImage(FileUpload $file, string $namespace, string $id, bool $copy = false): string;
-
-    public function uploadPdf(FileUpload $file, string $namespace, string $id, bool $copy = false): string;
+    public function processUpload(FileUpload $file, string $namespace, string $id, array $args = []): string;
 }

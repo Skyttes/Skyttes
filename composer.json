@@ -12,7 +12,6 @@
     "require": {
         "doctrine/dbal": "^3.6",
         "doctrine/orm": "^2.15",
-        "ext-curl": "*",
         "nette/application": "^3.1",
         "nette/bootstrap": "^3.2",
         "nette/di": "^3.1",
@@ -33,6 +32,11 @@
         "skyttes/doctrine": "self.version",
         "skyttes/security": "self.version",
         "skyttes/vite": "self.version"
+    },
+    "suggest": {
+        "ext-imagick": "Required for Images::stripImage()",
+        "ext-curl": "Required for Vite Dev Server handling",
+        "icamys/php-sitemap-generator": "For sitemap generation"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

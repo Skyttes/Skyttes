@@ -71,7 +71,7 @@ class Positionable
     }
 
     /**
-     * @param class-string<Positioned> $entity
+     * @param class-string<PositionedInterface> $entity
      */
     public static function current(
         string $entity,
@@ -93,7 +93,7 @@ class Positionable
             $result = $qb->getQuery()->getSingleResult();
 
             if ($result) {
-                assert($result instanceof Positioned);
+                assert($result instanceof PositionedInterface);
             }
 
             $position = $result ? $result->getPosition() : 0;
@@ -105,7 +105,7 @@ class Positionable
     }
 
     /**
-     * @param class-string<Positioned> $entity
+     * @param class-string<PositionedInterface> $entity
      */
     public static function next(
         string $entity,
@@ -115,7 +115,7 @@ class Positionable
     }
 
     /**
-     * @param class-string<Positioned> $entity
+     * @param class-string<PositionedInterface> $entity
      */
     public static function previous(
         string $entity,

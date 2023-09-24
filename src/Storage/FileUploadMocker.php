@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Skyttes\FileUpload;
+namespace Skyttes\Storage;
 
 use Nette\Http\FileUpload;
 

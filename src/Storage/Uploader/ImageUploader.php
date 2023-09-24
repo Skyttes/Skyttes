@@ -20,9 +20,9 @@ class ImageUploader extends FileUploader implements UploaderInterface
         parent::__construct($repository, self::MIME_TYPES);
     }
 
-    public function upload(FileUpload $file, string $namespace, string|null $id = null, bool $copy = false, array $args = []): string
+    public function upload(FileUpload $file, string $namespace, string|null $id = null, array $args = []): string
     {
-        $upload = parent::upload($file, $namespace, $id, $copy, $args);
+        $upload = parent::upload($file, $namespace, $id, $args);
 
         if (!empty($args["image.optimize"])) {
             if (!(isset($args["image.strip"]) && $args["image.strip"] === false)) {

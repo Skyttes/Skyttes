@@ -15,7 +15,7 @@ class FileUploader implements UploaderInterface
     ) {
     }
 
-    public function upload(FileUpload $file, string $namespace, string|null $id = null, bool $copy = false, array $args = []): string
+    public function upload(FileUpload $file, string $namespace, string|null $id = null, array $args = []): string
     {
         if (!$file->isOk()) {
             throw new UploadException("Failed to process provided file.");

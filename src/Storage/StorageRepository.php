@@ -53,18 +53,32 @@ class StorageRepository implements StorageRepositoryInterface
         return unlink($path);
     }
 
-    public function isPublicPath(string $path): bool
+    public function isRealPath(string $path): bool
     {
         return str_contains($path, $this->publicDir);
     }
 
+    public function isPublicPath(string $path): bool
+    {
+        return str_contains($path, $this->publicRoot);
+    }
+
     public function getPublicPath(string $path): string
     {
-        if (!$this->isPublicPath($path)) {
+        if (!$this->isRealPath($path)) {
             throw new RuntimeException("Path is not in public dir");
         }
 
         return str_replace($this->publicDir, $this->publicRoot, $path);
+    }
+
+    public function getRealPath(string $path): string
+    {
+        if (!$this->isPublicPath($path)) {
+            throw new RuntimeException("Path is not in public root");
+        }
+
+        return str_replace($this->publicRoot, $this->publicDir, $path);
     }
 
     public function joinPath(string $path): string

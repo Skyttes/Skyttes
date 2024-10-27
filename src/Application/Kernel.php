@@ -81,6 +81,11 @@ final class Kernel {
         return $configurator;
     }
 
+    /**
+     * @template T of class-string
+     * @param T $type
+     * @return T
+     */
     public function run(string $type = Application::class, ?callable $configure = null)
     {
         $configurator = static::configure();
@@ -94,7 +99,10 @@ final class Kernel {
         Kernel::$kernel = $this;
         $this->container = $container;
 
-        $container->getByType($type)->run();
+        $instance = $container->getByType($type);
+        $instance->run();
+
+        return $instance;
     }
 
     public static function getKernel(): Kernel

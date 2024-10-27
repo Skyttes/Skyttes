@@ -12,6 +12,8 @@ final class Kernel {
 
     public static ?Kernel $kernel = null;
 
+    public readonly string $rootDir;
+
     public readonly string $appDir;
 
     public readonly string $configDir;
@@ -23,7 +25,7 @@ final class Kernel {
     public readonly string $tempDir;
 
     public function __construct(
-        public readonly string $rootDir,
+        string $rootDir,
         public readonly bool $debugMode = false,
         /** @var string[] */
         public readonly array $configs = [],
@@ -34,7 +36,7 @@ final class Kernel {
         ?string $logDir = null,
         ?string $tempDir = null,
     ) {
-        $this->rootDir = realpath($this->rootDir);
+        $this->rootDir = realpath($rootDir);
 
         $this->appDir = $appDir ?? realpath($this->rootDir . "/src");
         $this->configDir = $configDir ?? realpath($this->rootDir . "/config");

@@ -16,8 +16,6 @@ interface StorageRepositoryInterface {
     public function deleteFile(string $path): bool;
 
     public function isRealPath(string $path): bool;
-    
-    public function isPublic(string $path): bool;
 
     public function getPublicPath(string $path): string;
     

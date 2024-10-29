@@ -12,6 +12,8 @@ final class Kernel {
 
     public static ?Kernel $kernel = null;
 
+    public readonly Params $params;
+
     public readonly string $rootDir;
 
     public readonly string $appDir;
@@ -36,6 +38,7 @@ final class Kernel {
         ?string $logDir = null,
         ?string $tempDir = null,
     ) {
+        $this->params = new Params();
         $this->rootDir = realpath($rootDir);
 
         $this->appDir = $appDir ?? realpath($this->rootDir . "/src");
@@ -55,9 +58,23 @@ final class Kernel {
             "env" => getenv()
         ]);
 
-        foreach ($this->configs as $file) {
+        foreach ($this->configs as $fileName) {
+            if (str_starts_with("/", $fileName)) {
+                $fileName = substr($fileName, 1, strlen($fileName));
+            }
+
+            if (str_ends_with("/", $fileName)) {
+                $fileName = substr($fileName, 0, strlen($fileName) - 1);
+            }
+
+            $fileName = trim($fileName);
+
+            if (!str_ends_with($fileName, ".neon")) {
+                $fileName = "$fileName.neon";
+            }
+
             $configurator->addConfig(
-                    $this->configDir . (str_ends_with($file, ".neon") ? $file : "$file.neon"),
+                    $this->configDir . "/" . $fileName,
             );
         }
 
@@ -68,6 +85,7 @@ final class Kernel {
         $configurator->addStaticParameters([
             "rootDir" => $this->rootDir,
             "appDir" => $this->appDir,
+            "publicDir" => $this->publicDir,
             "configDir" => $this->configDir,
             "logDir" => $this->logDir,
             "tempDir" => $this->tempDir,
@@ -88,15 +106,15 @@ final class Kernel {
      */
     public function run(string $type = Application::class, ?callable $configure = null)
     {
+        Kernel::$kernel = $this;
         $configurator = static::configure();
 
         if (is_callable($configure)) {
-            call_user_func($configure, $configurator);
+            call_user_func($configure, $configurator, $this->params);
         }
-        
-        $container = $configurator->createContainer();
+        $this->params->lock();
 
-        Kernel::$kernel = $this;
+        $container = $configurator->createContainer();
         $this->container = $container;
 
         $instance = $container->getByType($type);
@@ -137,6 +155,16 @@ final class Kernel {
         }
 
         return $languages;
+    }
+
+    public static function getParams(): Params {
+        $params = self::getKernel()->params;
+
+        if (!$params) {
+            throw new RuntimeException("Params are not set");
+        }
+
+        return $params;
     }
 
 }

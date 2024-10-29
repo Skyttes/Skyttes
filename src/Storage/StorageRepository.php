@@ -12,7 +12,7 @@ class StorageRepository implements StorageRepositoryInterface
         public readonly string $publicRoot,
         private string $dataDir = "data"
     ) {
-        $this->dataDir = realpath(implode([$publicDir, $dataDir], DIRECTORY_SEPARATOR));
+        $this->dataDir = realpath(implode(DIRECTORY_SEPARATOR, [$publicDir, $dataDir]));
 
         $this->createDirectory($this->dataDir);
     }

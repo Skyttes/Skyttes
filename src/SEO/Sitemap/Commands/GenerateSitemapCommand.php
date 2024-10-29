@@ -27,7 +27,7 @@ class GenerateSitemapCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription("Dump the current database to an SQL file.")
+        $this->setDescription("Generate a website sitemap.")
             ->addArgument(
                 self::DESTINATION_ARG,
                 InputArgument::OPTIONAL,

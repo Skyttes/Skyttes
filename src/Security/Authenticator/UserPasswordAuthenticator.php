@@ -10,7 +10,7 @@ use Skyttes\Security\Authenticator\Exception\CannotFindUserException;
 use Skyttes\Security\User\UserIdentity;
 use Skyttes\Security\User\UserServiceInterface;
 
-readonly class UserAuthenticator implements Authenticator, IdentityHandler
+readonly class UserPasswordAuthenticator implements Authenticator, IdentityHandler
 {
     public function __construct(
         private UserServiceInterface $userService,
@@ -18,13 +18,13 @@ readonly class UserAuthenticator implements Authenticator, IdentityHandler
     ) {
     }
 
-    public function authenticate(string $user, string $password): IIdentity
+    public function authenticate(string $identifier, string $password): IIdentity
     {
-        $user = $this->userService->findByIdentifier($user);
+        $user = $this->userService->findByPresentingIdentifier($identifier);
 
         if (!$user || !$this->passwords->verify($password, $user->getPasswordHash())) {
             $ex = new CannotFindUserException();
-            $ex->identifier = $user;
+            $ex->identifier = $identifier;
 
             throw $ex;
         }
@@ -39,7 +39,7 @@ readonly class UserAuthenticator implements Authenticator, IdentityHandler
 
     public function wakeupIdentity(IIdentity $identity): ?IIdentity
     {
-        $user = $this->userService->findByIdentifier($identity->getId());
+        $user = $this->userService->findById($identity->getId());
         return $user ? new UserIdentity($user) : null;
     }
     

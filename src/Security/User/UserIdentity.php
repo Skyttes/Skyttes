@@ -11,7 +11,7 @@ class UserIdentity extends SimpleIdentity
     public function __construct(UserInterface $user)
     {
         $role = $user->getRole();
-        parent::__construct($user->getIdentifier(), $role ? is_array($role) ? $role : [$role] : [], $user->toArray());
+        parent::__construct($user->getId(), $role ? is_array($role) ? $role : [$role] : [], $user->toArray());
     }
 
     public function getData(): array

@@ -10,12 +10,17 @@ class FileType
 
     public const PDF_TYPES = ["application/pdf"];
 
+    public static function isValidFile(FileUpload $file): bool
+    {
+        return $file->isOk() && filesize($file->getTemporaryFile()) >= 1;
+    }
+
     /**
      * @param string[] $types
      */
     public static function isOneOfMimeTypes(FileUpload $file, array $types): bool
     {
-        return $file->isOk() && in_array($file->getContentType(), $types, true);
+        return static::isValidFile($file) && in_array($file->getContentType(), $types, true);
     }
 
     public static function isImage(FileUpload $file): bool

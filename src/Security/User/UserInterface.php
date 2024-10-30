@@ -4,7 +4,9 @@ namespace Skyttes\Security\User;
 
 interface UserInterface
 {
-    public function getIdentifier(): string;
+    public function getId(): string;
+
+    public function getPresentingIdentifier(): string;
 
     public function getPasswordHash(): string;
 

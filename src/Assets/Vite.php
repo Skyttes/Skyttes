@@ -35,6 +35,7 @@ class Vite
         public readonly string|null $devServer = null,
         public string|null $devServerPublic = null,
         private readonly int $devServerTimeout = 100,
+        private readonly bool $useDevServer = true,
         private readonly bool $forceDevServer = false,
     )
     {
@@ -46,7 +47,7 @@ class Vite
 
     public function shouldUseDevServer(): bool
     {
-        if (empty($this->devServer)) {
+        if (!$this->useDevServer || empty($this->devServer)) {
             return false;
         }
 

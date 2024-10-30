@@ -36,6 +36,7 @@ final class Kernel {
         ?string $appDir = null,
         ?string $configDir = null,
         ?string $logDir = null,
+        ?string $publicDir = null,
         ?string $tempDir = null,
     ) {
         $this->params = new Params();
@@ -44,6 +45,7 @@ final class Kernel {
         $this->appDir = $appDir ?? realpath($this->rootDir . "/src");
         $this->configDir = $configDir ?? realpath($this->rootDir . "/config");
         $this->logDir = $logDir ?? realpath($this->rootDir . "/logs");
+        $this->publicDir = $publicDir ?? realpath($this->rootDir . "/public");
         $this->tempDir = $tempDir ?? realpath($this->rootDir . "/temp");
     }
 

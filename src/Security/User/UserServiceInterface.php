@@ -4,6 +4,7 @@ namespace Skyttes\Security\User;
 
 interface UserServiceInterface
 {
-    public function findByIdentifier(string $identifier): ?UserInterface;
+    public function findById(string $id): ?UserInterface;
     
+    public function findByPresentingIdentifier(string $identifier): ?UserInterface;
 }

@@ -61,14 +61,7 @@ final class Kernel {
         ]);
 
         foreach ($this->configs as $fileName) {
-            if (str_starts_with("/", $fileName)) {
-                $fileName = substr($fileName, 1, strlen($fileName));
-            }
-
-            if (str_ends_with("/", $fileName)) {
-                $fileName = substr($fileName, 0, strlen($fileName) - 1);
-            }
-
+            $fileName = ltrim(rtrim($fileName, "/"), "/");
             $fileName = trim($fileName);
 
             if (!str_ends_with($fileName, ".neon")) {

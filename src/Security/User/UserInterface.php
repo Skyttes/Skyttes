@@ -16,8 +16,8 @@ interface UserInterface
     public function toArray(): array;
 
     /**
-     * @return string[]|string|null|
+     * @return string[]|string|null|object
      */
-    public function getRole(): string|array|null;
+    public function getRole(): string|object|array|null;
     
 }

@@ -9,7 +9,6 @@ use Nette\Security\Passwords;
 use Skyttes\Security\Authenticator\Exception\CannotFindUserException;
 use Skyttes\Security\User\UserIdentity;
 use Skyttes\Security\User\UserServiceInterface;
-
 readonly class UserPasswordAuthenticator implements Authenticator, IdentityHandler
 {
     public function __construct(

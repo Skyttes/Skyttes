@@ -97,7 +97,7 @@ class Vite
     public function createScripts(array $data): void
     {
         foreach ($data['scripts'] as $path) {
-            echo Html::el('script')->type('module')->defer("")->src($this->baseUrl . $path);
+            echo Html::el('script')->type('module')->defer(true)->src($this->baseUrl . $path);
         }
     }
 
